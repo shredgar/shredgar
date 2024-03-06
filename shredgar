@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<link href="https://fonts.googleapis.com/css2?family=Fredericka+the+Great&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Zilla+Slab+Highlight&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Tangerine&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Kaushan+Script&display=swap" rel="stylesheet">
+
+<html>
+<head>
+    <title>Edgar Wedig's Portfolio</title>
+    <style>
+        body {
+            font-family: 'Fredericka the Great', cursive; /* Placeholder for the requested "crazy" font */
+            background-color: #f0f0f0;
+        }
+        .container {
+            display: flex;
+            justify-content: space-between;
+            margin: 20px;
+        }
+        .column {
+            flex: 1;
+        }
+        .column:first-child, .column:last-child {
+            flex-basis: 25%;
+        }
+        .column:nth-child(2) {
+            flex-basis: 50%;
+        }
+        .title, .email, .whatsapp, .linkedin, .academic-profile {
+            color: #000fff; /* Bold color */
+            font-weight: medium;
+        }
+        .professional-profile {
+            color: #c000c0; /* Bold color */
+            font-weight: medium;
+        }
+        a {
+            color: #00f;
+        }
+        .button {
+            display: block;
+            width: 220px;
+            margin: 20px auto;
+            padding: 10px;
+            background-color: #f0ffff;
+            color: #009999;
+            text-align: center;
+            text-decoration: none;
+            font-weight: medium;
+            font-size: 26px;
+        }
+        .work-experience, .references, .chat-with-ai {
+            font-family: 'Tangerine', cursive;
+            color: #0f0;
+        }
+         
+        .title {
+            font-family: 'Kaushan Script', cursive;
+            color: #009999;
+            font-weight: bold;
+        }
+        .chat-with-ai {
+            background-color: #f0f8ff;
+            padding: 20px;
+            margin-top: 20px;
+            border-radius: 10px;
+        }
+        .chat-with-ai h2 {
+            color: #000;
+        }
+        .chat-with-ai p {
+            color: #555;
+        }
+        .chat-input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .chat-submit {
+            width: 100%;
+            padding: 10px;
+            background-color: #009999;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+    <script>
+        async function submitChat() {
+            const input = document.getElementById('chat-input').value;
+            if (input.length > 30) {
+                alert('Please limit your question to 30 words.');
+                return;
+            }
+            const response = await fetch('/chat', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ question: input }),
+            });
+            const data = await response.json();
+            document.getElementById('chat-response').innerText = data.answer;
+        }
+    </script>
+</head>
+<body>
+    <!-- Previous content omitted for brevity -->
+
+    <!-- Chat with AI Edgar Section -->
+    <div class="chat-with-ai">
+        <h2>Chat with AI Edgar</h2>
+        <p>Have questions or need advice? You can ask AI Edgar anything (up to 30 words).</p>
+        <input type="text" id="chat-input" class="chat-input" placeholder="Ask me anything...">
+        <button onclick="submitChat()" class="chat-submit">Submit</button>
+        <p id="chat-response" class="chat-response"></p>
+    </div>
+
+</body>
+</html>
